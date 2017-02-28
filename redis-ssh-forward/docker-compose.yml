@@ -1,0 +1,14 @@
+version: '2'
+services:
+  redis_ssh_tunnel:
+    build: .
+    entrypoint: ssh
+    stdin_open: true
+    tty: true
+    volumes:
+      - ~/.ssh/id_rsa:/home/docker/.ssh-external/id_rsa:ro
+    command: "-oStrictHostKeyChecking=no -t -i /home/docker/.ssh-external/id_rsa -L *:6379:CONTAINER_IP:6379 YOUR_USER@YOUR_DOMAIN"
+networks:
+  default:
+    external:
+      name: leandot-net-local
