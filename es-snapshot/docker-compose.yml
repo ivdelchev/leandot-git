@@ -1,0 +1,15 @@
+version: '2'
+services:
+  es:
+    build: .
+    image: leandot-es:1.0.0
+    ports:
+      - 9200:9200
+    volumes:
+      - leandot-data-prod:/usr/share/elasticsearch/data
+      - leandot-backup-prod:/opt/elasticsearch/backup
+volumes:
+  leandot-data-prod:
+    external: true
+  leandot-backup-prod:
+    external: true
